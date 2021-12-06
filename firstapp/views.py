@@ -1,5 +1,5 @@
 # coding=utf-8
-from django.shortcuts import render, HttpResponse, render_to_response
+from django.shortcuts import render, HttpResponse
 from firstapp.models import people, article
 from django.template import Context, Template
 from django import forms
@@ -119,23 +119,23 @@ def index(request):
             errors.append('密码不能为空')
         else:
             pwd = request.POST.get('password')
-        import psycopg2
-        conn = psycopg2.connect(database='Sakuzyo', user='postgres', password ='jkl1314',host='localhost', port='5432')
-        curs = conn.cursor()
-        curs.execute("select * from pg_tables")
-        tablename = curs.fetchall()[0][1]
-        curs.execute(f"select * from \"{tablename}\"")
-        data = curs.fetchall()
+        #import psycopg2
+        #conn = psycopg2.connect(database='Sakuzyo', user='postgres', password ='jkl1314',host='localhost', port='5432')
+        #curs = conn.cursor()
+        #curs.execute("select * from pg_tables")
+        #tablename = curs.fetchall()[0][1]
+        #curs.execute(f"select * from \"{tablename}\"")
+        #data = curs.fetchall()
         # print(data)
-        if user == data[0][0] and pwd == data[0][1]:
+        #if user == data[0][0] and pwd == data[0][1]:
+        #    return render(request, 'first_web.html', context)
+        #else:
+        #    errors.append('用户名或密码错误,请重新登录')
+        person = people.objects.filter(username__exact=user, password__exact=pwd)
+        if person:
             return render(request, 'first_web.html', context)
         else:
             errors.append('用户名或密码错误,请重新登录')
-        # person = people.objects.filter(username__exact=user, password__exact=pwd)
-        # if person:
-        #     return render(request, 'first_web.html', context)
-        # else:
-        #     errors.append('用户名或密码错误,请重新登录')
     return render(request, 'index.html', {'errors': errors})
 
 # Create your views here.
