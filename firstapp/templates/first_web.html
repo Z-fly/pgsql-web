@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{%load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>2047</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="{%static 'images/favicon.ico'%}"/>
+    <script type="text/javascript">
+        function plus1()
+        {
+            var n=document.getElementById("num1");
+            n.innerHTML=parseInt(n.innerHTML)+1;
+        }
+
+    </script>
+    <script type="text/javascript">
+        function plus2()
+        {
+            var n=document.getElementById("num2");
+            n.innerHTML=parseInt(n.innerHTML)+1;
+        }
+
+    </script>
+    <script>
+      function jump(){
+       window.location.href="http://news.qq.com/";
+      }
+
+    </script>
+    <script>
+      function jump1(){
+       window.location.href="http://zh-tw.facebook.com/";
+      }
+
+    </script>
+    <script>
+      function jump2(){
+       window.location.href="http://www.tui-te.com/";
+      }
+
+    </script>
+    <script>
+      function jump3(){
+       window.location.href="https://www.google.co.kr/";
+      }
+
+    </script>
+    <script>
+      function jump4(){
+       window.location.href="http://news.qq.com/";
+      }
+
+    </script>
+    <script>
+      function jump5(){
+       window.location.href="http://news.qq.com/";
+      }
+
+    </script>
+    <script>
+      function jump6(){
+       window.location.href="http://news.qq.com/";
+      }
+
+    </script>
+    <script>
+      function jump7(){
+       window.location.href="http://news.qq.com/";
+      }
+
+    </script>
+</head>
+<body>
+<div class="ui inverted vertical  segment">
+    <div class="ui Big image" align="center">
+        <img src="{% static 'images/banner.png'%}" width="77%" alt=""/>
+    </div>
+</div>
+<div align="center"><a href="index">
+    <button type="button" class="ui ui primary button">注销</button>
+    </a>
+<!--    <a href="http://zhangzhi0000.xyz:8081/">-->
+<!--    <button type="button" class="ui ui primary button">PostgreSql后台管理</button>-->
+<!--    </a>-->
+</div>
+
+<div class="ui  vertical  segment">
+    {%for article in article_list%}
+    <div class="ui container segment">
+        <div class="ui blue right ribbon label">
+            life
+        </div>
+        <h1 class="ui header">{{article.headline}}</h1>
+
+        <img class="ui small left floated image" src="{{MEDIA_URL}}{{article.img}}">
+        <p> {{article.content|truncatewords:100}}
+        </p>
+        <button onclick="jump()" type="button" name="button" class="ui inverted blue button">Read more</button>
+        <div class="ui labeled button" tabindex="0">
+            <div onmousedown="plus1()" class="ui red button"><i class="heart icon"></i> Like</div>
+            <a class="ui basic red left pointing label" id='num1'>
+                2047
+            </a>
+        </div>
+        <div class="ui labeled button" tabindex="0">
+            <div onmousedown="plus2()" class="ui basic blue button"><i class="fork icon"></i> Forks</div>
+            <a class="ui basic left pointing blue label" id='num2'>
+                2,047
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+<div class="ui inverted  vertical very padded  segment">
+    您还可以通过以下方式获取资讯：
+    <button onclick="jump1()" class="ui  huge facebook button"><i class="facebook icon"></i> Facebook</button>
+    <button onclick="jump2()" class="ui huge twitter button"><i class="twitter icon"></i> Twitter</button>
+    <button onclick="jump3()" class="ui huge google plus button"><i class="google plus icon"></i> Google Plus</button>
+    <button onclick="jump4()" class="ui huge vk button"><i class="vk icon"></i> VK</button>
+    <button onclick="jump5()" class="ui huge linkedin button"><i class="linkedin icon"></i> LinkedIn</button>
+    <button onclick="jump6()" class="ui huge instagram button"><i class="instagram icon"></i> Instagram</button>
+    <button onclick="jump7()" class="ui huge youtube button"><i class="youtube icon"></i> YouTube</button>
+</div>
+</body>
+</html>

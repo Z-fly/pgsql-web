@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{%load staticfiles %}
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>注册登陆界面</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" href="{% static ''%}css/style.css"/>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+    <style type="text/css">
+.bk{
+  background-image: url({% static 'images/1.jpg'%});
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+    </style>
+    <script type="text/javascript">
+    var code ; //在全局定义验证码
+    //产生验证码
+    function createCode(){
+        code = "";
+        var codeLength = 4;//验证码的长度
+        var checkCode = document.getElementById("code");
+        var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z');//随机数
+        for(var i = 0; i < codeLength; i++) {//循环操作
+            var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）
+            code += random[index];//根据索引取得随机数加到code上
+        }
+        checkCode.value='Z';//把code值赋给验证码
+    }
+    //校验验证码
+    //document.getElementById("Yzm").addEventListener("change",checkyzm);
+
+    function checkyzm(){
+          var check=false;
+          var inputCode = document.getElementById("Yzm").value.toUpperCase(); //取得输入的验证码并转化为大写
+          if(inputCode.length <= 0) { //若输入的验证码长度为0
+              alert("请输入验证码！"); //则弹出请输入验证码
+              $("#Yzm").focus();
+              check = false;
+          }
+          else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时
+              //alert("验证码输入错误!"); //则弹出验证码输入错误
+              //createCode();//刷新验证码
+              //$("#Yzm").val("");//清空文本框
+              //$("#Yzm").focus();//重新聚焦验证码框
+              check = true;
+          }
+          else { //输入正确时
+              $("#Yzm").blur();//绑定验证码输入正确时要做的事
+              check = true;
+
+          }
+          return check;
+      };
+
+    </script>
+<body class="bk">
+<script>
+	function(down)
+	{
+      closest('message');
+      transition('fade')
+  })
+}
+
+</script>
+{% if errors %}
+<div onclick="down" class="ui warning message" id='message'>
+    <i class="close icon"></i>
+    <div class="header">登录状态:</div>
+    {% for error in errors %}
+    {{error}}
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="login-container">
+    <h1>注册登录界面</h1>
+
+    <div class="connect">
+        <p>欢迎</p>
+    </div>
+
+    <form action="index" method="POST" id="loginForm" onsubmit="return checkyzm()">
+        {%csrf_token%}
+        <div>
+            <input type="text" name="username" class="username" placeholder="用户名" autocomplete="off"/>
+        </div>
+        <div>
+            <input type="password" name="password" class="password" placeholder="密码" oncontextmenu="return false"
+                   onpaste="return false"/>
+        </div>
+        <div class="new-web-row"><span class="web-form-span ">验证码</span><input type="text" class=" web-form-input "
+                                                                               required="required" id="Yzm" value="Z"
+                                                                               style="width: 30%;float: initial; margin-left: 27%;"><input
+                type="button" id="code" value="点我验证" class="btn-list-btn"  style="margin:0;float: right;width:20%"
+                onclick="createCode()"/>
+
+            <button id="submit" type="submit">登 录</button>
+    </form>
+<!--    <a href="find">-->
+<!--        <button type='button' class="ui secondary button">忘记密码？</button>-->
+<!--    </a>-->
+<!--    <a href="regist">-->
+<!--        <button type='button' class="ui secondary button">还没有账号？</button>-->
+<!--    </a>-->
+
+</div>
+
+<script src="{% static 'js/jquery.min.js'%}"></script>
+<script src="{% static 'js/common.js'%}"></script>
+<!--背景图片自动更换-->
+<script src="{% static 'js/supersized.3.2.7.min.js'%}"></script>
+<script src="{% static 'js/supersized-init.js'%}"></script>
+<!--表单验证-->
+<!--<script src="{% static 'js/jquery.validate.min.js'%}"></script>-->
+
+</body>
+</html>
